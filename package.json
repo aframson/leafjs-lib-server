@@ -1,6 +1,6 @@
 {
-  "name": "leafjs",
-  "version": "1.0.0",
+  "name": "leaf-server",
+  "version": "1.0.1",
   "description": "leaf libraries",
   "main": "index.js",
   "scripts": {
