@@ -3,7 +3,6 @@ const leaf = express()
 const http = require('http')
 const { Server } = require('socket.io')
 
-
 const log = require('morgan')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -43,12 +42,9 @@ const Leaf = {
         }
         if (obj.useStaticFiles === true) {
             // allow static files 
-            app.use(express.static('public'));
+            app.use(express.static('./settings/public'));
         }
-        if (obj.StaticName) {
-            // allow static files 
-            app.use(express.static(obj.StaticName));
-        }
+      
 
     },
     init: (port, obj, callback) => {
