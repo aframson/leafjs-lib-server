@@ -71,7 +71,7 @@ const Leaf = {
             }
             cluster.on('exit', (worker, code, signal) => {
                 console.log(`server-worker ${worker.process.pid} died`);
-             
+                cluster.fork();
             });
         } else {
             const server = http.createServer(leaf)
