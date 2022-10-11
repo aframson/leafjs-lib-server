@@ -10,17 +10,13 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const multer = require('multer')
 const upload = multer()
-const {basicAuth} =  require('./settings/middlewares/index')
+const Redis = require("redis");
+
 
 
 const Leaf = {
+  
     config: (app, obj) => {
-
-        if (obj.basicAuth === true) {
-        
-            app.use(basicAuth);
-        }
-
         if (obj.cors === true) {
             // to prevent cors errors
             app.use(cors());
@@ -57,6 +53,17 @@ const Leaf = {
 
     },
     init: (port, obj, callback) => {
+
+        // let redisClient;
+        // (async () => {
+        //     redisClient = Redis.createClient();
+          
+        //     redisClient.on("error", (error) => console.error(`Error : ${error}`));
+          
+        //     await redisClient.connect();
+        //   })();
+     
+
         const PORT = process.env.PORT || port // you can change the port here 
         const NODE_ENV = process.env.NODE_ENV || 'development'
         const isDev = process.env.NODE_ENV !== 'production'
@@ -67,7 +74,7 @@ const Leaf = {
         if (cluster.isMaster) {
             console.log(`
     Master server ${process.pid} is running,
-    Leaf server is unitilizing ${numCPUs} CPU's for better 
+    Leaf server is unitilizing ${numCPUs} CPU cores's for better 
     performance and handling load balancing`);
             console.log(`
     Number of CPU's :`,numCPUs
