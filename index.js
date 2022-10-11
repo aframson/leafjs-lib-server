@@ -10,9 +10,16 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const multer = require('multer')
 const upload = multer()
+const {basicAuth} =  require('./settings/middlewares/index')
+
 
 const Leaf = {
     config: (app, obj) => {
+
+        if (obj.basicAuth === true) {
+        
+            app.use(basicAuth);
+        }
 
         if (obj.cors === true) {
             // to prevent cors errors
